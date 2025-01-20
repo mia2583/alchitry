@@ -85,7 +85,7 @@ module greeter (
  
                     // if we have sent all of HELLO_TEXT
                     if (hello_count.q == $width(HELLO_TEXT, 0) - 1)
-                        state.d = States.IDLE; // return to IDLE
+                        state.d = States.IDLE  // return to IDLE
                     }
                 }
     }

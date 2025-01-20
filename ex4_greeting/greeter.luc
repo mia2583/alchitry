@@ -8,37 +8,37 @@ module greeter (
     input tx_busy      // TX is busy flag
 ) {
 
-    const NUM_LETTERS = 14;
+    const NUM_LETTERS = 14 
     
-    enum States {IDLE, GREET};
+    enum States {IDLE, GREET} 
 
     .clk(clk) {
         .rst(rst) {
-            dff state[$width(States)];
+            dff state[$width(States)] 
         }
-        dff count[$clog2(NUM_LETTERS)]; // min bits to store NUM_LETTERS - 1
+        dff count[$clog2(NUM_LETTERS)]  // min bits to store NUM_LETTERS - 1
     }
 
-    hello_world_rom rom;
+    hello_world_rom rom 
 
     always {
-        rom.address = count.q;
-        tx_data = rom.letter;       // which data to send (get from ROM)
+        rom.address = count.q 
+        tx_data = rom.letter        // which data to send (get from ROM)
 
-        new_tx = 0; // default to 0
+        new_tx = 0  // default to 0
  
         case (state.q) {
             States.IDLE:               // if IDLE and receive "h", change state to GREET
-                count.d = 0;
+                count.d = 0 
                 if (new_rx && rx_data == "h")
-                    state.d = States.GREET;
+                    state.d = States.GREET 
  
             States.GREET:              // if GREET, send "Hello World". Once done, change state to IDLE
                 if (!tx_busy) {
-                    count.d = count.q + 1;
-                    new_tx = 1;
+                    count.d = count.q + 1 
+                    new_tx = 1 
                     if (count.q == NUM_LETTERS - 1)
-                        state.d = States.IDLE;
+                        state.d = States.IDLE 
                 }
         }
     }

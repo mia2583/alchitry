@@ -11,15 +11,15 @@ module alchitry_top (
     .clk(clk) {
         // The reset conditioner is used to synchronize the reset signal to the FPGA
         // clock. This ensures the entire FPGA comes out of reset at the same time.
-        reset_conditioner reset_cond;
+        reset_conditioner reset_cond 
         
         .rst(rst) {
             #BAUD(1000000), #CLK_FREQ(100000000) {
-              uart_rx rx;
-              uart_tx tx;
+              uart_rx rx 
+              uart_tx tx 
             }
  
-            greeter greeter; // instance of our greeter
+            greeter greeter  // instance of our greeter
         }
     }
 
@@ -27,16 +27,16 @@ module alchitry_top (
         reset_cond.in = ~rst_n  // input raw inverted reset signal
         rst = reset_cond.out    // conditioned reset
 
-        rx.rx = usb_rx;         // connect rx input
-        usb_tx = tx.tx;         // connect tx output
+        rx.rx = usb_rx          // connect rx input
+        usb_tx = tx.tx          // connect tx output
  
-        greeter.new_rx = rx.new_data;
-        greeter.rx_data = rx.data;
-        tx.new_data = greeter.new_tx;
-        tx.data = greeter.tx_data;
-        greeter.tx_busy = tx.busy;
-        tx.block = 0;
+        greeter.new_rx = rx.new_data 
+        greeter.rx_data = rx.data 
+        tx.new_data = greeter.new_tx 
+        tx.data = greeter.tx_data 
+        greeter.tx_busy = tx.busy 
+        tx.block = 0 
         
-        led = 8h00;
+        led = 8h00 
     }
 }

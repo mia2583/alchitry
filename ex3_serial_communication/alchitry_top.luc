@@ -12,11 +12,11 @@ module alchitry_top (
         // The reset conditioner is used to synchronize the reset signal to the FPGA
         // clock. This ensures the entire FPGA comes out of reset at the same time.
         reset_conditioner reset_cond
-        dff data[8];    // flip-flops to store last character
+        dff data[8]     // flip-flops to store last character
         
         .rst(rst) {
-            uart_rx rx (#BAUD(1000000), #CLK_FREQ(100000000)); // serial receiver
-            uart_tx tx (#BAUD(1000000), #CLK_FREQ(100000000)); // serial transmitter
+            uart_rx rx (#BAUD(1000000), #CLK_FREQ(100000000))  // serial receiver
+            uart_tx tx (#BAUD(1000000), #CLK_FREQ(100000000))  // serial transmitter
          }
     }
 
@@ -26,16 +26,16 @@ module alchitry_top (
 
         led = 8h00              // turn LEDs off
 
-        rx.rx = usb_rx;         // connect rx input
-        usb_tx = tx.tx;         // connect tx output
+        rx.rx = usb_rx          // connect rx input
+        usb_tx = tx.tx          // connect tx output
  
-        tx.new_data = rx.new_data;
-        tx.data = rx.data;         
-        tx.block = 0;           // no flow control, do not block
+        tx.new_data = rx.new_data 
+        tx.data = rx.data          
+        tx.block = 0            // no flow control, do not block
         
         if(rx.new_data)         // save received data
-            data.d = rx.data;
+            data.d = rx.data 
         
-        led = data.q;           // output the data
+        led = data.q            // output the data
     }
 }

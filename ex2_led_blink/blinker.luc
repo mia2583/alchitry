@@ -4,10 +4,10 @@ module blinker (
     output blink  // output to LED
   ) {
  
-  dff counter[25](.clk(clk), .rst(rst));
+  dff counter[25](.clk(clk), .rst(rst)) 
  
   always {
-    blink = counter.q[24];
-    counter.d = counter.q + 1;
+    blink = counter.q[24] 
+    counter.d = counter.q + 1 
   }
 }
