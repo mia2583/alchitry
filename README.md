@@ -46,7 +46,7 @@
 
 ## Example 6, 7
 MIG Wrapper (DDR3)
-- 동작: 
+- 동작: 숫자 카운팅 LED로 표현하기
 - Example7은 캐시 사용으로 더 빠르게 계산된다.
 
 <a href="https://mia2583.github.io/assets/img/post/FPGA/alchitry_ex6.mp4">
